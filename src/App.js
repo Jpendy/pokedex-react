@@ -52,6 +52,12 @@ console.log(this.state.selected)
         return b.defense - a.defense;
        })
     }
+    if(this.state.selected === 'hp') {
+      return array.sort(function(a, b) {
+        return b.hp - a.hp;
+       })
+    }
+
     if( this.state.selected === 'mega' ){
       return array.filter(item => {
         return item.pokemon.includes('mega')
@@ -86,17 +92,19 @@ console.log(this.state.selected)
 
                 <select onChange={this.handleOptionChange}>
                     <option value="" >All</option>
-                    <option value="normal" >normal</option>
-                    <option value="fire" >fire</option>
-                    <option value="water" >water</option>
-                    <option value="grass" >grass</option>
-                    <option value="flying" >flying</option>
-                    <option value="bug" >bug</option>
-                    <option value="poison" >poison</option>
-                    <option value="dragon" >dragon</option>
-                    <option value="attack" >attack</option>
-                    <option value="defense" >defense</option>
-                    <option value="mega" >mega</option>
+                    <option value="normal" >Normal</option>
+                    <option value="fire" >Fire</option>
+                    <option value="water" >Water</option>
+                    <option value="grass" >Grass</option>
+                    <option value="flying" >Flying</option>
+                    <option value="bug" >Bug</option>
+                    <option value="poison" >Poison</option>
+                    <option value="dragon" >Dragon</option>
+                    <option value="attack" >Attack</option>
+                    <option value="defense" >Defense</option>
+                    <option value="mega" >Mega</option>
+                    <option value="hp" >HP</option>
+                    
 
 
 

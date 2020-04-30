@@ -14,8 +14,7 @@ export default class PokemonList extends Component {
                      <h1> { `Defense: ${ this.props.pokemonProp.defense } ` } </h1>
                      <h1> { `Ability: ${ this.props.pokemonProp.ability_1 } ` } </h1>
                      <h1> { `Hidden-Ability: ${ this.props.pokemonProp.ability_hidden } ` } </h1>
-
-
+                     <h1> { `HP: ${ this.props.pokemonProp.hp } ` } </h1>
 
                 </li>
             </div>
