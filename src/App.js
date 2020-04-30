@@ -38,7 +38,33 @@ console.log(this.state.selected)
     this.getInitialData()
     this.setState({ selected: e.target.value });
   }
+  statSort = array => {
+    if(!this.state.selected) {
+     return array.filter(() => true)
+  }
+    if(this.state.selected === 'attack') {
+      return array.sort(function(a, b) {
+        return b.attack - a.attack;
+       })
+    }
+    if(this.state.selected === 'defense') {
+      return array.sort(function(a, b) {
+        return b.defense - a.defense;
+       })
+    }
+    if( this.state.selected === 'mega' ){
+      return array.filter(item => {
+        return item.pokemon.includes('mega')
+      })
+    }
 
+    
+    else {
+      return array.filter(item => {
+        return item.type_1 === this.state.selected || item.type_2 === this.state.selected;
+   })
+    }
+  }
 
   render() {
 
@@ -60,7 +86,7 @@ console.log(this.state.selected)
 
                 <select onChange={this.handleOptionChange}>
                     <option value="" >All</option>
-                    <option value="noraml" >normal</option>
+                    <option value="normal" >normal</option>
                     <option value="fire" >fire</option>
                     <option value="water" >water</option>
                     <option value="grass" >grass</option>
@@ -68,6 +94,11 @@ console.log(this.state.selected)
                     <option value="bug" >bug</option>
                     <option value="poison" >poison</option>
                     <option value="dragon" >dragon</option>
+                    <option value="attack" >attack</option>
+                    <option value="defense" >defense</option>
+                    <option value="mega" >mega</option>
+
+
 
 
 
@@ -79,11 +110,7 @@ console.log(this.state.selected)
             <section className="render-section">
               <ul>
                   {
-                    this.state.data.filter(item => {
-                      if (!this.state.selected) return true;
-                      return  item.type_1 === this.state.selected || item.type_2 === this.state.selected;
-
-                    }).map(item => {
+                    this.statSort(this.state.data).map(item => {
                       return <PokemonList pokemonProp = { item } />;
                         
                     })
