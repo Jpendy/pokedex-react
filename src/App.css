@@ -8,7 +8,7 @@ body {
 
 header {
     background: red;
-    height: 70px;
+    height: 90px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -42,6 +42,7 @@ button {
 
 select {
     margin: 20px;
+    width: 165px;
 }
 
 
@@ -68,3 +69,20 @@ li {
     background: lawngreen;
 }
 
+.nav-link {
+    font-size: 30px;
+    margin-right: 50px;
+    border: 1px solid black;
+    padding: 5px 15px;
+    background: orange;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: .3s;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: -1px 1px 10px 2px;
+}
+
+.nav-link:hover {
+    background: lawngreen;
+}
