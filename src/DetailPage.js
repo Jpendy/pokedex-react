@@ -34,4 +34,3 @@ export default class DetailPage extends Component {
         )
     }
 }
-// `https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${this.props.match.params.pokemon}`

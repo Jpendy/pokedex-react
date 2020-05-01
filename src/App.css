@@ -86,3 +86,7 @@ li {
 .nav-link:hover {
     background: lawngreen;
 }
+
+.list-link {
+    text-decoration: none;
+}

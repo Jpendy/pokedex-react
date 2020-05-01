@@ -7,8 +7,8 @@ export default class PokemonList extends Component {
         return (
             <div>
                 <li>
-                    <Link to={`/pokemon/${pokemon.pokemon}`}>
-                        
+                    <Link className="list-link" to={`/pokemon/${pokemon.pokemon}`}>
+
                      <h1> { this.props.pokemonProp.pokemon.toUpperCase() } </h1>
                      <img src= { this.props.pokemonProp.url_image } alt = '' />
 
