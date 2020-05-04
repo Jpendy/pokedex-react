@@ -7,31 +7,37 @@ import SearchSection from './SearchSection'
 
 export default class SearchPage extends Component {
 
-  state = { searchQuery: null,
+  state = { 
+            searchQuery: null,
             selected: '',
-            data: [] }
+            data: [],
+            loading: true,
+            page: 1,
+            info: {} 
+          }
 
     handleChange = (event) => {
       const value = event.target.value;
       this.setState( {searchQuery: value} );
   }
+
   getInitialData = async () => {
+
     const requestedData = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?`);
 
     this.setState({ data: requestedData.body.results })
   }
   
   componentDidMount() {
-this.getInitialData()
+    try { this.getInitialData() }
+    finally { this.setState({ loading: false }) };
 console.log(this.state.selected)
 }
-  handleClick = async () => {
 
+  handleClick = async () => {
       const requestedData = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${this.state.searchQuery}`);
 
-      // console.log(requestedData.body.results[0])
       this.setState({ data: requestedData.body.results })
-
       console.log(requestedData)
   }
 
@@ -39,6 +45,7 @@ console.log(this.state.selected)
     this.getInitialData()
     this.setState({ selected: e.target.value });
   }
+
   statSort = array => {
     if(!this.state.selected) {
      return array.filter(() => true)
@@ -72,7 +79,12 @@ console.log(this.state.selected)
     }
   }
 
+
   render() {
+
+    if(this.state.loading) {
+      return ( <img src="http://placekitten.com/200/300" alt="" /> )
+    }
 
     console.log(this.getInitialData)
     console.log(this.state.data)

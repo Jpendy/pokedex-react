@@ -8,9 +8,11 @@ import './App.css'
 export default class DetailPage extends Component {
 
     state = {
-        data: []
+        data: [],
+        loading: true
     }
 
+    
     async componentDidMount() {
 
         const requestedData = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${this.props.match.params.pokemonName}`);
