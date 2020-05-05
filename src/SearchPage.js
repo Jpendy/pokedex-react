@@ -134,17 +134,18 @@ export default class SearchPage extends Component {
         <main className="main-section">
 
             <section className="search-section">
-                  <SearchSection
-                      searchSectionHandleChange={this.handleChange}
-                      searchSectionHandleClick={this.handleClick}
-                      searchSectionOptionsChange={this.handleOptionChange}
+                <section className="fixed-search-section">
+                    <SearchSection
+                        searchSectionHandleChange={this.handleChange}
+                        searchSectionHandleClick={this.handleClick}
+                        searchSectionOptionsChange={this.handleOptionChange}
 
-                      lengthProp = { length }
-                      routeToNextPageProp = { this.routeToNextPage }
-                      routeToPreviousPageProp = { this.routeToPreviousPage }
-                      pageProp = { this.state.page }
-                  />
-                                            
+                        lengthProp = { length }
+                        routeToNextPageProp = { this.routeToNextPage }
+                        routeToPreviousPageProp = { this.routeToPreviousPage }
+                        pageProp = { this.state.page }
+                    />
+                  </section>               
             </section>
              
             <section className="render-section">

@@ -24,17 +24,13 @@ header h1 {
     /* justify-content: space-around; */
 }
 
-.search-section {
-    width: 300px;
-    margin: 30px;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    /* justify-content: flex-start; */
-    /* position: fixed;
-    left: 30px;
-    top: 115px; */
 
+.fixed-search-section {
+    margin: auto;
+    width: 200px;
+    position: fixed;
+    top: 116px;
+    left: 30px;
 }
 
 .search-section h3 {
