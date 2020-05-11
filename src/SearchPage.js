@@ -23,11 +23,7 @@ export default class SearchPage extends Component {
   }
 
   getInitialData = async () => {
-    // const searchParams = new URLSearchParams(window.location.search);
-    // const query = searchParams.get('pokemon');
-
-    // this.setState( {searchQuery: query});
-
+    
     let requestedData = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?page=${this.state.page}`);
 
     if (this.state.selected) {
@@ -99,14 +95,12 @@ export default class SearchPage extends Component {
 
     routeToNextPage = async () => {
       let nextPageNumber = this.state.page + 1;  
-      console.log(nextPageNumber)
        await this.setState({ page: nextPageNumber }) 
        this.getInitialData()
     }
 
     routeToPreviousPage = async () => {
       let prevPageNumber = this.state.page - 1;  
-      console.log(prevPageNumber)
        await this.setState({ page: prevPageNumber }) 
        this.getInitialData()
     }
