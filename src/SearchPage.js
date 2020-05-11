@@ -9,11 +9,12 @@ export default class SearchPage extends Component {
 
   state = { 
             searchQuery: null,
-            selected: '',
+            selected: null,
             data: [],
             loading: true,
             page: 1,
-            info: {} 
+            perPage: '',
+            count:  ''
           }
 
     handleChange = (event) => {
@@ -22,29 +23,41 @@ export default class SearchPage extends Component {
   }
 
   getInitialData = async () => {
+    
+    let requestedData = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?page=${this.state.page}`);
 
-    const requestedData = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?`);
+    if (this.state.selected) {
+      
+      requestedData = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex/?type=${this.state.selected}&page=${this.state.page}`)
+    }
 
-    this.setState({ data: requestedData.body.results })
-  }
+    this.setState({ 
+    data: requestedData.body.results,
+    perPage: requestedData.body.perPage,
+    count: requestedData.body.count  
+  })
+}
   
+
   componentDidMount() {
     try { this.getInitialData() }
+    
     finally { this.setState({ loading: false }) };
-console.log(this.state.selected)
+
 }
 
   handleClick = async () => {
       const requestedData = await request.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex?pokemon=${this.state.searchQuery}`);
 
       this.setState({ data: requestedData.body.results })
-      console.log(requestedData)
   }
 
   handleOptionChange = (e) => {
+
     this.getInitialData()
     this.setState({ selected: e.target.value });
   }
+
 
   statSort = array => {
     if(!this.state.selected) {
@@ -77,17 +90,35 @@ console.log(this.state.selected)
         return item.type_1 === this.state.selected || item.type_2 === this.state.selected;
    })
     }
-  }
+}
+
+
+    routeToNextPage = async () => {
+      let nextPageNumber = this.state.page + 1;  
+       await this.setState({ page: nextPageNumber }) 
+       this.getInitialData()
+    }
+
+    routeToPreviousPage = async () => {
+      let prevPageNumber = this.state.page - 1;  
+       await this.setState({ page: prevPageNumber }) 
+       this.getInitialData()
+    }
+
+  
 
 
   render() {
+    const length = Math.ceil(this.state.count/this.state.perPage);
+    console.log(length)
+    console.log(this.state.page)
 
     if(this.state.loading) {
       return ( <img src="http://placekitten.com/200/300" alt="" /> )
     }
 
-    console.log(this.getInitialData)
-    console.log(this.state.data)
+    // console.log(this.getInitialData)
+    // console.log(this.state.data)
     return (
       <div>
         
@@ -97,27 +128,37 @@ console.log(this.state.selected)
         <main className="main-section">
 
             <section className="search-section">
-                  <SearchSection
-                      searchSectionHandleChange={this.handleChange}
-                      searchSectionHandleClick={this.handleClick}
-                      searchSectionOptionsChange={this.handleOptionChange}
-                  />
+                <section className="fixed-search-section">
+                    <SearchSection
+                        searchSectionHandleChange={this.handleChange}
+                        searchSectionHandleClick={this.handleClick}
+                        searchSectionOptionsChange={this.handleOptionChange}
+
+                        lengthProp = { length }
+                        routeToNextPageProp = { this.routeToNextPage }
+                        routeToPreviousPageProp = { this.routeToPreviousPage }
+                        pageProp = { this.state.page }
+                    />
+                  </section>               
             </section>
              
             <section className="render-section">
               <ul>
                   {
                     this.statSort(this.state.data).map(item => {
-                      return <PokemonList pokemonProp = { item } />;
-                        
+                      return <PokemonList pokemonProp = { item } />;                       
                     })
-
                   }
               </ul>
               </section>
 
           </main>
+          
       </div>
     )
   }
+  
 }
+
+
+     

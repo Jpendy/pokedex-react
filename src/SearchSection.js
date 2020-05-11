@@ -11,7 +11,7 @@ export default class SearchSection extends Component {
                     <select onChange={this.props.searchSectionOptionsChange}>
                         <option value="" >All</option>
                         <option value="normal" >Normal</option>
-                        <option value="fire" >Fire</option>
+                        <option value="fire">Fire</option>
                         <option value="water" >Water</option>
                         <option value="grass" >Grass</option>
                         <option value="flying" >Flying</option>
@@ -23,6 +23,10 @@ export default class SearchSection extends Component {
                         <option value="mega" >Mega</option>
                         <option value="hp" >HP</option>                
                     </select>
+
+                    { this.props.pageProp < this.props.lengthProp && <button onClick={ this.props.routeToNextPageProp }>Next</button> }
+                      { this.props.pageProp > 1 && <button onClick={ this.props.routeToPreviousPageProp }>Previous</button> }
+                      { <h3> page: {this.props.pageProp } / { this.props.lengthProp } </h3> }
 
             </div>
         )

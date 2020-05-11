@@ -19,15 +19,23 @@ header h1 {
 }
 
 .main-section {
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 200px 1200px;
+    /* justify-content: space-around; */
 }
 
-.search-section {
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+
+.fixed-search-section {
+    margin: auto;
+    width: 200px;
+    position: fixed;
+    top: 116px;
+    left: 30px;
+}
+
+.search-section h3 {
+    position: relative;
+    left: 45px;
 }
 
 input{
@@ -47,21 +55,25 @@ select {
 
 
 img {
-    width: 200px;
+    width: 160px;
 }
 
 ul {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-end;
     text-align: center;
+    width: 90%;
+    
+
 }
 
 li {
     margin: 30px;
-    width: 260px;
+    width: 200px;
     font-family: monospace;
+    font-size: 10px;
     border: 1px solid red;
     padding: 10px 10px;
     border-radius: 20px;
